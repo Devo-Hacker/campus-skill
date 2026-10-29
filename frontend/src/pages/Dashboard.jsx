@@ -1,4 +1,5 @@
 import { useAuth } from "../context/AuthContext";
+import StudentDashboard from "./StudentDashboard";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -6,11 +7,10 @@ export default function Dashboard() {
   return (
     <div className="container">
       <h2>Welcome, {user.name}</h2>
-      <p>You are logged in as a <strong>{user.role}</strong>.</p>
-      {user.role === "club" ? (
-        <p>Club dashboard coming next: post gigs and manage applicants.</p>
+      {user.role === "student" ? (
+        <StudentDashboard />
       ) : (
-        <p>Student dashboard coming next: browse gigs and track applications.</p>
+        <p className="muted">Club dashboard coming in Part 3.</p>
       )}
     </div>
   );

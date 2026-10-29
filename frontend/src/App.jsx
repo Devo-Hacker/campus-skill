@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Gigs from "./pages/Gigs";
+import GigDetail from "./pages/GigDetail";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/gigs" element={<Gigs />} />
+<Route path="/gigs/:id" element={<GigDetail />} />
       </Routes>
     </>
   );
