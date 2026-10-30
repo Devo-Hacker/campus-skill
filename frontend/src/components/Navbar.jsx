@@ -17,6 +17,7 @@ export default function Navbar() {
         <Link to="/gigs">Browse Gigs</Link>
         {user ? (
           <>
+            {user.role === "club" && <Link to="/post-gig">Post Gig</Link>}
             <Link to="/dashboard">Dashboard</Link>
             <span className="badge">{user.role}</span>
             <button onClick={handleLogout}>Logout</button>
