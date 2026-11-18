@@ -4,14 +4,13 @@ import { connectDB } from "@/lib/db";
 import Gig from "@/models/Gig";
 import Review from "@/models/Review";
 import { getCurrentUser } from "@/lib/auth";
+import { notify } from "@/lib/notify";
 
 // POST /api/reviews   body: { gigId, rating, comment }  (club reviews hired student)
 export async function POST(req) {
   try {
     const user = await getCurrentUser();
-    if (!user) {
-      return NextResponse.json({ error: "Please log in" }, { status: 401 });
-    }
+    if (!user) return NextResponse.json({ error: "Please log in" }, { status: 401 });
 
     const { gigId, rating, comment } = await req.json();
     if (!mongoose.Types.ObjectId.isValid(gigId)) {
@@ -24,9 +23,7 @@ export async function POST(req) {
 
     await connectDB();
     const gig = await Gig.findById(gigId);
-    if (!gig) {
-      return NextResponse.json({ error: "Gig not found" }, { status: 404 });
-    }
+    if (!gig) return NextResponse.json({ error: "Gig not found" }, { status: 404 });
     if (gig.postedBy.toString() !== user._id.toString()) {
       return NextResponse.json({ error: "Not your gig" }, { status: 403 });
     }
@@ -40,6 +37,12 @@ export async function POST(req) {
       student: gig.hiredStudent,
       rating: r,
       comment: comment || "",
+    });
+
+    await notify(gig.hiredStudent, {
+      type: "reviewed",
+      message: `${user.clubName || user.name} rated you ${r}/5 for "${gig.title}"`,
+      link: `/students/${gig.hiredStudent}`,
     });
 
     return NextResponse.json({ review }, { status: 201 });

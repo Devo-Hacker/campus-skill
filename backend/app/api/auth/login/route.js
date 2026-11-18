@@ -6,20 +6,24 @@ import { signToken, cookieOptions } from "@/lib/auth";
 
 export async function POST(req) {
   try {
-    const { email, password } = await req.json();
+    const { email, password, role } = await req.json();
     if (!email || !password) {
       return NextResponse.json({ error: "Email and password required" }, { status: 400 });
     }
 
     await connectDB();
     const user = await User.findOne({ email: email.toLowerCase() }).select("+password");
-    if (!user) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-    }
+    if (!user) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
 
     const ok = await bcrypt.compare(password, user.password);
-    if (!ok) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    if (!ok) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+
+    // Optional: which "door" the person used (student or club)
+    if (role && user.role !== role) {
+      return NextResponse.json(
+        { error: `This is a ${user.role} account. Please use the ${user.role} login.` },
+        { status: 403 }
+      );
     }
 
     const res = NextResponse.json({
