@@ -10,6 +10,7 @@ import GigDetail from "./pages/GigDetail";
 import PostGig from "./pages/PostGig";
 import ManageGig from "./pages/ManageGig";
 import StudentProfile from "./pages/StudentProfile";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -25,29 +26,22 @@ export default function App() {
 
         <Route
           path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><Dashboard /></ProtectedRoute>}
+        />
+        <Route
+          path="/profile"
+          element={<ProtectedRoute><Profile /></ProtectedRoute>}
         />
         <Route
           path="/post-gig"
-          element={
-            <ProtectedRoute role="club">
-              <PostGig />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute role="club"><PostGig /></ProtectedRoute>}
         />
         <Route
           path="/manage/:id"
-          element={
-            <ProtectedRoute role="club">
-              <ManageGig />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute role="club"><ManageGig /></ProtectedRoute>}
         />
       </Routes>
+      <footer className="footer">CampusGigs · Built for campus communities</footer>
     </>
   );
 }

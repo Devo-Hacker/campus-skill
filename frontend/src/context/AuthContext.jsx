@@ -7,7 +7,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // On first load, ask the backend if we're already logged in
   useEffect(() => {
     api
       .get("/auth/me")
@@ -33,8 +32,14 @@ export function AuthProvider({ children }) {
     setUser(null);
   }
 
+  function updateUser(newUser) {
+    setUser(newUser);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, logout, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
