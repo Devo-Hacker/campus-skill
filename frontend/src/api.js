@@ -1,9 +1,10 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+// Local: set VITE_API_URL in .env. Production: leave unset so calls go to /api on the same domain.
+const API_URL = import.meta.env.VITE_API_URL ?? "";
 
 async function request(path, { method = "GET", body } = {}) {
   const res = await fetch(`${API_URL}/api${path}`, {
     method,
-    credentials: "include", // sends the login cookie
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -26,4 +27,5 @@ export const api = {
   post: (path, body) => request(path, { method: "POST", body }),
   put: (path, body) => request(path, { method: "PUT", body }),
   patch: (path, body) => request(path, { method: "PATCH", body }),
+  delete: (path) => request(path, { method: "DELETE" }),
 };
