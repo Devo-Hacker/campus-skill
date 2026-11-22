@@ -1,0 +1,84 @@
+/* ---------- Page header ---------- */
+.page-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.page-head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); margin: 2px 0 0; font-weight: 800; }
+
+/* ---------- Stat tiles ---------- */
+.tiles { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 22px; }
+.tile {
+  background: #fff; border: 2px solid var(--ink); border-radius: 18px;
+  padding: 14px 16px; box-shadow: var(--shadow);
+}
+.tile strong { display: block; font-family: var(--head); font-size: 1.9rem; line-height: 1.1; }
+.tile span { color: var(--ink-2); font-size: 0.85rem; font-weight: 500; }
+.tile.t1 { background: #ffe9cf; }
+.tile.t2 { background: #dcebff; }
+.tile.t3 { background: #e5fbb0; }
+.tile.t4 { background: #ffd9ee; }
+
+/* ---------- Auth (two doors) ---------- */
+.auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
+.door {
+  border: 2px solid var(--ink); border-radius: 24px; padding: 26px;
+  box-shadow: 6px 6px 0 var(--ink); display: flex; flex-direction: column; gap: 6px;
+}
+.door-dark { background: linear-gradient(145deg, #1b1740, #3b2a8f); color: #fff; }
+.door-light { background: #fff; }
+.door h3 { font-size: 1.6rem; margin: 10px 0 2px; }
+.door .door-sub { margin: 0 0 12px; opacity: 0.8; font-size: 0.92rem; }
+.door .form { margin-top: 6px; }
+.door-dark .form input { background: #fff; }
+.door-foot { margin-top: 12px; font-size: 0.88rem; text-align: center; }
+.door-dark .door-foot a { color: var(--lime); }
+.pw-wrap { position: relative; }
+.pw-wrap input { width: 100%; padding-right: 72px; }
+.pw-toggle {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: 0; cursor: pointer; font-weight: 700; font-size: 0.8rem; color: var(--purple);
+}
+.door .btn-lime, .door .btn-purple { width: 100%; padding: 12px; }
+
+.seg { display: flex; border: 2px solid var(--ink); border-radius: 999px; overflow: hidden; background: #fff; }
+.seg button { flex: 1; padding: 10px; border: 0; background: #fff; font-weight: 600; cursor: pointer; color: var(--ink); }
+.seg button.active { background: var(--ink); color: #fff; }
+
+/* ---------- Gig detail ---------- */
+.detail-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; align-items: start; }
+.desc { white-space: pre-wrap; color: var(--ink-2); }
+.notice {
+  border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
+  background: #f1ecff; margin: 10px 0; font-size: 0.92rem;
+}
+.notice.good { background: #d9f99d; }
+.notice.warn { background: #fde68a; }
+.notice.bad { background: #fecaca; }
+.side-card h3 { font-size: 1.15rem; }
+.kv { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1.5px dashed #d9d4f2; }
+.kv:last-child { border-bottom: 0; }
+.kv span { color: var(--muted); }
+
+/* ---------- Applicants / manage ---------- */
+.applicant-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.person { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.btn-danger {
+  background: #fff; color: #b91c1c; border: 2px solid #b91c1c; box-shadow: 2px 2px 0 #b91c1c;
+}
+.btn-danger:hover { box-shadow: 3px 3px 0 #b91c1c; }
+.stars { display: flex; gap: 4px; }
+.star { background: none; border: 0; font-size: 2rem; cursor: pointer; color: #cbd5e1; padding: 0; line-height: 1; }
+.star.on { color: #f59e0b; }
+.star-row { color: #f59e0b; font-size: 1.1rem; letter-spacing: 2px; }
+
+/* ---------- Profile ---------- */
+.profile-head { display: flex; gap: 16px; align-items: center; margin-bottom: 8px; }
+.avatar-lg { width: 76px; height: 76px; font-size: 1.7rem; }
+.link-list a { display: block; margin: 4px 0; word-break: break-all; }
+
+.form textarea { resize: vertical; }
+.hint { font-size: 0.8rem; color: var(--muted); margin: -6px 0 0; }
+
+@media (max-width: 820px) {
+  .auth-grid, .detail-grid { grid-template-columns: 1fr; }
+}
